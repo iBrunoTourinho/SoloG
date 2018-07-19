@@ -1,1 +1,1 @@
-# Solog
+# Praxis-P

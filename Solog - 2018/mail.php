@@ -1,33 +1,32 @@
 <?php
-
-	if(isset( $_POST['name']))
-	  $name = $_POST['name'];
-	if(isset( $_POST['email']))
-	  $email = $_POST['email'];
-	if(isset( $_POST['message']))
-	  $message = $_POST['message'];
-	if ($name == ''){
-	  echo "Nome não pode estar vazio.";
-	  die();
+	$errors = '';
+	$myemail = 'brunotourinho19@hotmail.com';//<-----Put Your email address here.
+	if(empty($_POST['name'])  ||
+	   empty($_POST['email']) ||
+	   empty($_POST['message']))
+	{
+	    $errors .= "\n Erro: Todos os campos são requeridos";
 	}
-	if ($email == ''){
-	  echo "E-mail não pode estar vazio.";
-	  die();
-	} else {
-	  if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
-	    echo "Email com formato inválido.";
-	    die();
-	  }
-	}
-	if ($message == ''){
-	  echo "A mensagem não pode estar vazia.";
-	  die();
+	$name = $_POST['name'];
+	$email_address = $_POST['email'];
+	$message = $_POST['message'];
+	if (!preg_match(
+	"/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/i",
+	$email_address))
+	{
+	    $errors .= "\n Erro: Email Inválido";
 	}
 
-
-	$content = "From: $name \n Email: $email \n Message: $message";
-	$recipient = "youremail@here.com";
-	$mailheader = "From: $email \r\n";
-	mail($recipient, $content, $mailheader) or die("Error!");
-	echo "Email enviado!";
+	if( empty($errors))
+	{
+	$to = $myemail;
+	$email_subject = "Formulário de Contato: $name";
+	$email_body = "Você recebeu uma nova mensagem. ".
+	"	Aqui estão os detalhes:\n Nome: $name \n ".
+	"Email: $email_address\n Menssagem \n $message";
+	$headers = "Para: $myemail\n";
+	$headers .= "De: $email_address";
+	mail($to,$email_subject,$email_body,$headers);
+	//redirect to the 'thank you' page
+	header('Location: index.html');}
 ?>

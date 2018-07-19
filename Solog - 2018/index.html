@@ -217,12 +217,12 @@
 
     		<div class="row">
     			<div class="col-md-5 mt-3 mb-2">
-    				<form id="formulario" name="formulario" action="mail.php" method="POST"> 
+    				<form id="formulario" name="formulario" action="mail.php" method="post"> 
     					<div class="form-group">
 	    					<input type="name" name="name" class="form-control mt-2" placeholder="Nome" autocomplete="off" required>
 							<input type="email" name="email" class="form-control mt-2" placeholder="Nome@exemplo.com" autocomplete="off" required>
-							<textarea class="form-control mt-2" name="message" rows="8" placeholder="Escreva aqui..." required=""></textarea>
-							<a type="button" class="btn btn-lg btn-block mt-3 enviar-b" onclick="document.getElementById('formulario').submit();">Enviar</a>
+							<textarea class="form-control mt-2" name="message" rows="8" placeholder="Escreva aqui..." required></textarea>
+							<input  type="submit" class="btn btn-lg btn-block mt-3 enviar-b" Enviar>
 						</div>
     				</form>
     				<div class="status"></div>
@@ -246,5 +246,20 @@
     	</div>
     </footer>
    	<p id="praxis" class="text-center ">Desenvolvido por <a href="http://www.praxisjr.com/" target="_blank">Praxis - Empresa Junior.</a> ® 2017. Todos os direitos reservados.</p>
+
+
+
+<!-- JS Validação -->
+<script language="JavaScript">
+	var frmvalidator  = new Validator("formulario");
+	frmvalidator.addValidation("name","req","Porfavor preencha seu nome");
+	frmvalidator.addValidation("email","req","Porfavor preencha seu email");
+	frmvalidator.addValidation("email","email",
+	  "Email Inválido");
+	function Alerta(){
+		alert("Email Enviado com Sucesso")}
+	
+</script>
+
 </body>
 </html>
