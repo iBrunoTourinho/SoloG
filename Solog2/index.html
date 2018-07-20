@@ -187,22 +187,23 @@
 				</div>
 				
 				<div class="col-md-6">
-					<form class="animated fadeInRight">	
+					<form class="animated fadeInRight" method="post" action="orcamento.php" id="orcamentoform">	
 						<div class="form-group ">
-							<input type="text" class="form-control mt-2" name="nomeOrcamento" autocomplete="off"  id="nome-orcamento" placeholder="Nome: ">
-							<input type="text" class="form-control mt-2" name="enderecoOrcamento" autocomplete="off" id="endereco-orcamento" placeholder="Endereço: ">
+							<input type="text" class="form-control mt-2" name="name"  placeholder="Nome: " required>
+							<input type="text" class="form-control mt-2" name="
+							address" placeholder="Endereço: " required>
 							  <div class="form-row">
 							    <div class="col">
-							    	<input type="text" class="form-control mt-2" name="cidadeOrcamento" autocomplete="off" id="cidade-orcamento" placeholder="Cidade: ">
+							    	<input type="text" class="form-control mt-2" name="city" placeholder="Cidade: " required>
 							    </div>
 							    <div class="col">
-							      <input type="text" class="form-control mt-2 " name="cepOrcamento" autocomplete="off" id="cep-orcamento" placeholder="CEP: ">
+							      <input type="text" class="form-control mt-2 " name="cep"  placeholder="CEP: " onkeypress="mascara(this, '#####-###')" maxlength="9" required>
 							    </div>
 							  </div>
-							<input type="text" class="form-control mt-2" name="emailOrcamento" autocomplete="off" id="email-orcamento" placeholder="E-mail: ">
-							<input type="tel" class="form-control mt-2" name="telefoneOrcamento" autocomplete="off" id="telefone-orcamento" placeholder="Telefone: ">
-							<textarea class="form-control mt-2" name="textoOrcamento" autocomplete="off" placeholder="O que deseja: " rows="5"></textarea>
-							<a href="" type="button" class="btn btn-lg btn-block mt-3 enviar-b" id="enviar-orc">Enviar</a>
+							<input type="email" class="form-control mt-2" name="email"  placeholder="E-mail: " required>
+							<input type="tel" class="form-control mt-2" name="phone"  placeholder="Telefone: " onkeypress="mascara(this, '## #####-####')" maxlength="15" required>
+							<textarea class="form-control mt-2" name="message"  placeholder="O que deseja: " rows="5"></textarea>
+							 <input  type="submit" class="btn btn-lg btn-block mt-3 enviar-b" id="enviar-orc" Enviar>
 						</div>
 					</form>
 				</div>
@@ -249,17 +250,39 @@
 
 
 
-<!-- JS Validação -->
+<!-- JS ValidaçãoContato -->
 <script language="JavaScript">
 	var frmvalidator  = new Validator("formulario");
 	frmvalidator.addValidation("name","req","Porfavor preencha seu nome");
 	frmvalidator.addValidation("email","req","Porfavor preencha seu email");
 	frmvalidator.addValidation("email","email",
 	  "Email Inválido");
-	function Alerta(){
-		alert("Email Enviado com Sucesso")}
-	
 </script>
 
+<!-- JS ValidaçãoOrçamento -->
+<script language="JavaScript">
+	var frmvalidator  = new Validator("formulario");
+	frmvalidator.addValidation("name","req","Porfavor preencha seu nome");
+	frmvalidator.addValidation("email","req","Porfavor preencha seu email");
+	frmvalidator.addValidation("email","email",
+	  "Email Inválido");
+	frmvalidator.addValidation("address","req","Porfavor preencha seu endereço");
+	frmvalidator.addValidation("city","req","Porfavor preencha sua cidade");
+	frmvalidator.addValidation("cep","req","Porfavor preencha seu CEP");
+	frmvalidator.addValidation("phone","req","Porfavor preencha seu telefone");
+
+</script>
+
+<!-- JS de Máscara -->
+<script type="text/javascript">
+ function mascara(t, mask){
+	 var i = t.value.length;
+	 var saida = mask.substring(1,0);
+	 var texto = mask.substring(i)
+	 if (texto.substring(0,1) != saida){
+	 t.value += texto.substring(0,1);
+	 }
+ }
+ </script>
 </body>
 </html>

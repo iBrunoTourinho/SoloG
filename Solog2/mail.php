@@ -1,4 +1,4 @@
-<?php
+<?php 
 	$errors = '';
 	$myemail = 'brunotourinho19@hotmail.com';//<-----Put Your email address here.
 	if(empty($_POST['name'])  ||
@@ -22,11 +22,23 @@
 	$to = $myemail;
 	$email_subject = "Formulário de Contato: $name";
 	$email_body = "Você recebeu uma nova mensagem. ".
-	"	Aqui estão os detalhes:\n Nome: $name \n ".
-	"Email: $email_address\n Menssagem \n $message";
+	"Aqui estão os detalhes:\n Nome: $name \n ".
+	"Email: $email_address\n Menssagem: \n $message";
 	$headers = "Para: $myemail\n";
 	$headers .= "De: $email_address";
-	mail($to,$email_subject,$email_body,$headers);
-	//redirect to the 'thank you' page
-	header('Location: index.html');}
+	$send_mail = mail($to,$email_subject,$email_body,$headers);
+	if($send_mail){
+	    //alert enviado!
+	    echo "<script>alert('E-mail enviado com sucesso!');</script>";
+	    //redireciona para onde quiser, neste caso, para index.html
+	    header('Location: index.html');//redireciona para onde quiser, neste caso, para index.html
+	} else {
+	    //alert não enviado!
+	    echo "<script>alert('Falha ao enviar e-mail.');</script>";
+	    //redireciona para onde quiser, neste caso, para index.html
+	    header('Location: index.html');
+	}
+	}
 ?>
+
+
